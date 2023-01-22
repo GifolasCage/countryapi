@@ -47,7 +47,7 @@ function updateCountry(){
         document.getElementById("capitol").innerText = "Oslo";
         document.getElementById("region").innerText = "Europe";
         document.getElementById("population").innerText = "5,379,475";
-        wikipediaLink = "https://en.wikipedia.org/wiki/Norway"
+        wikipediaLink = "Norway"
     }
     else{
         document.getElementById("country-name").innerText = countryIndex[this.id]["officialname"]
