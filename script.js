@@ -6,6 +6,7 @@ let loading = true;
 
 window.onload = async function () {
     let statusText = document.getElementById("title");
+    let contentBox = document.getElementById("content-box");
     updateCountry();
     for (let i = 0; i < countryCount; i++) {
         await GetData(i);
@@ -13,10 +14,12 @@ window.onload = async function () {
             //console.log("loop finished");
             sort();
             statusText.innerHTML = "Countries of the World";
+            contentBox.classList.remove("d-none");
             loading = false;
+            console.log(countryIndex);
         }
         else{
-            statusText.innerHTML = "Loading please wait..."
+            statusText.innerHTML = "Loading please wait... " + ((i/countryCount)*100).toFixed() + "%";
             loading = true;
         }
     }
@@ -79,23 +82,21 @@ function createList(){
 }
 
 function searchList(){
-  // (A) GET HTML ELEMENTS
-  var filter = document.getElementById("searchinput"), // search box
-      list = document.querySelectorAll("li"); // all list items
- 
-  // (B) ATTACH KEY UP LISTENER TO SEARCH BOX
-  filter.onkeyup = () => {
-    console.log("hello");
-    // (B1) GET CURRENT SEARCH TERM
-    let search = filter.value.toLowerCase();
- 
-    // (B2) LOOP THROUGH LIST ITEMS - ONLY SHOW THOSE THAT MATCH SEARCH
-    for (let i of list) {
-      let item = i.innerHTML.toLowerCase();
-      if (item.indexOf(search) == -1) { i.classList.add("d-none"); }
-      else { i.classList.remove("d-none"); }
+    const searchBox = document.getElementById("searchinput");
+    const list = document.getElementById("country-list");
+
+    searchBox.addEventListener("input", function() {
+    const searchValue = this.value.toLowerCase();
+    const listItems = list.getElementsByTagName("li");
+    for (let i = 0; i < listItems.length; i++) {
+        const listItem = listItems[i];
+        if (listItem.textContent.toLowerCase().includes(searchValue)) {
+        listItem.style.display = "block";
+        } else {
+        listItem.style.display = "none";
+        }
     }
-  };
+    });
 }
 
 function wikipedia(){

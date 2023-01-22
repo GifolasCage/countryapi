@@ -14,18 +14,18 @@
         <div class="d-flex justify-content-center">
             <input type="text" class="form-control w-50" id="searchinput" placeholder="Search...">
         </div>
-        <div id="content-box" class="d-flex justify-content-center pt-3">
+        <div id="content-box" class="d-flex justify-content-center pt-3 d-none">
             <div id="country-info" class="w-25 border-start border-top border-bottom rounded">
-                <h3 id="country-name" class="text-center fs-4 fw-semibold"></h2>
+                <h3 id="country-name" class="text-center fs-4 fw-semibold mt-1"></h2>
                 <div class="text-center m-3">
                     <img class="img-fluid rounded" style="height: 200px;" src="" alt="" id="country-flag">
                 </div>
                 <p class="fw-light fs-5 ps-1">Capitol: <span class="fw-normal" id="capitol"></span></p>
                 <p class="fw-light fs-5 ps-1">Region: <span class="fw-normal" id="region"></span></p>
                 <p class="fw-light fs-5 ps-1">Population: <span class="fw-normal" id="population"></span></p>
-                <button class="btn btn-primary ms-1" onclick="wikipedia()">Wikipedia</button>
+                <button class="btn btn-primary ms-1 align-self-center" onclick="wikipedia()">Wikipedia</button>
             </div>
-            <div id="countries" class="w-25 overflow-y-scroll scrollbar-primary border-end border-top border-bottom rounded">
+            <div id="countries" class="w-25 overflow-y-scroll scrollbar-primary border-start border-end border-top border-bottom rounded">
                 <ul id="country-list" class="list-group"></ul>
             </div>
             <div class="fixed-bottom text-center fw-light">2023 <span class="bi bi-c-circle"></span></div>
