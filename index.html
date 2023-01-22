@@ -10,25 +10,30 @@
         <script src="script.js"></script>
     </head>
     <body>
-        <p class="display-5 text-center border-bottom bg-light p-3" id="title">Countries of the World</p>
-        <div class="d-flex justify-content-center">
-            <input type="text" class="form-control w-50" id="searchinput" placeholder="Search...">
+        <div class="container-fluid bg-light">
+            <p class="mb-0 display-6 text-center py-2" id="title">Countries of the World</p>
         </div>
-        <div id="content-box" class="d-flex justify-content-center pt-3 d-none">
-            <div id="country-info" class="w-25 border-start border-top border-bottom rounded">
-                <h3 id="country-name" class="text-center fs-4 fw-semibold mt-1"></h2>
-                <div class="text-center m-3">
-                    <img class="img-fluid rounded border border-1" style="height: 200px;" src="" alt="" id="country-flag">
+        <div id="content-box" class="container-fluid py-2">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8">
+                    <input type="text" class="form-control" id="searchinput" placeholder="Search...">
                 </div>
-                <p class="fw-light fs-5 ps-1">Capital: <span class="fw-normal" id="capitol"></span></p>
-                <p class="fw-light fs-5 ps-1">Region: <span class="fw-normal" id="region"></span></p>
-                <p class="fw-light fs-5 ps-1">Population: <span class="fw-normal" id="population"></span></p>
-                <button class="btn btn-primary ms-1" onclick="wikipedia()">Wikipedia</button>
             </div>
-            <div id="countries" class="w-25 overflow-y-scroll scrollbar-primary border-start border-end border-top border-bottom rounded">
-                <ul id="country-list" class="list-group"></ul>
+            <div class="row justify-content-center py-2 h-50">
+                <div id="country-info" class="col-12 col-md-4 pb-2 border border-1 rounded">
+                    <h3 id="country-name" class="text-center fs-4 fw-semibold mt-1"></h2>
+                    <div class="text-center m-3">
+                        <img class="img-fluid rounded border border-1" style="height: 20vh;" src="" alt="" id="country-flag">
+                    </div>
+                    <p class="fw-light fs-5 ps-1">Capital: <span class="fw-normal" id="capitol"></span></p>
+                    <p class="fw-light fs-5 ps-1">Region: <span class="fw-normal" id="region"></span></p>
+                    <p class="fw-light fs-5 ps-1">Population: <span class="fw-normal" id="population"></span></p>
+                    <button class="btn btn-primary ms-1" onclick="wikipedia()">Wikipedia</button>
+                </div>
+                <div id="countries" class="col-12 col-md-4 pb-2 border border-1 rounded" >
+                    <ul id="country-list" class="list-group-numbered list-group-flush overflow-y-scroll scrollbar-primary h-100"></ul>
+                </div>
             </div>
-            <div class="fixed-bottom text-center fw-light">2023 <span class="bi bi-c-circle"></span></div>
         </div>
     </body>
 </html>

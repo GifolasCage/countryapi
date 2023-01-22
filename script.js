@@ -2,25 +2,48 @@ var countryIndex = [{}];
 const countryCount = 250;
 let wikipediaLink;
 let loading = true;
+const debug = false;
 
 
 window.onload = async function () {
     let statusText = document.getElementById("title");
     let contentBox = document.getElementById("content-box");
     updateCountry();
-    for (let i = 0; i < countryCount; i++) {
-        await GetData(i);
-        if(i === countryCount-1){
-            //console.log("loop finished");
-            sort();
-            statusText.innerHTML = "Countries of the World";
-            contentBox.classList.remove("d-none");
-            loading = false;
-            console.log(countryIndex);
+    if(!debug){
+        for (let i = 0; i < countryCount; i++) {
+            await GetData(i);
+            if(i === countryCount-1){
+                //console.log("loop finished");
+                sort();
+                statusText.innerHTML = "Countries of the World";
+                contentBox.classList.remove("d-none");
+                loading = false;
+                console.log(countryIndex);
+            }
+            else{
+                statusText.innerHTML = "Loading please wait... " + ((i/countryCount)*100).toFixed() + "%";
+                loading = true;
+            }
         }
-        else{
-            statusText.innerHTML = "Loading please wait... " + ((i/countryCount)*100).toFixed() + "%";
-            loading = true;
+    }
+    else{
+        document.getElementById("country-name").innerText = "Kingdom of Norway";
+        document.getElementById("country-flag").src = "https://flagcdn.com/no.svg";
+        document.getElementById("capitol").innerText = "Oslo";
+        document.getElementById("region").innerText = "Europe";
+        document.getElementById("population").innerText = "5,379,475";
+        wikipediaLink = "Norway"
+        contentBox.classList.remove("d-none");
+
+        for(i=0;i<50;i++){
+            let country = document.createElement("li");
+            country.innerText = "placeholder item";
+            country.classList.add("country-list-name");
+            country.classList.add("list-group-item");
+            country.classList.add("border-bottom");
+            country.classList.add("fs-5");
+            country.classList.add("py-1");
+            document.getElementById("country-list").append(country);
         }
     }
 }
@@ -72,9 +95,12 @@ function createList(){
     for(i = 0; i<countryCount; i++){
         let country = document.createElement("li");
         country.id = i;
-        country.innerText = (i + 1).toString() + ": " + countryIndex[i]["name"];
+        country.innerText = countryIndex[i]["name"];
         country.classList.add("country-list-name");
         country.classList.add("list-group-item");
+        country.classList.add("border-bottom");
+        country.classList.add("fs-5");
+        country.classList.add("py-1");
         document.getElementById("country-list").append(country)
         country.addEventListener("click", updateCountry);
     }

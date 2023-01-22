@@ -21,3 +21,7 @@
   .scrollbar-primary {
     scrollbar-color: #8ca0c1 #F5F5F5;
   }
+
+  .country-list-name:hover{
+    background-color: rgb(219, 252, 255);
+  }
