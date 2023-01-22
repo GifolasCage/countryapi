@@ -8,13 +8,21 @@
         <script src="script.js"></script>
     </head>
     <body>
+        <h1 id="title">Countries of the World</h1>
+        <h2 id="statustext">Loading...</h2>
+        <input type="text" id="searchinput" placeholder="Search...">
         <div id="content-box">
             <div id="country-info">
                 <h3 id="country-name"></h2>
                 <img src="" alt="" id="country-flag">
-                
+                <p>Capitol: <span id="capitol"></span></p>
+                <p>Region: <span id="region"></span></p>
+                <p>Population: <span id="population"></span></p>
+                <button onclick="wikipedia()">Wikipedia</button>
             </div>
-            <div id="country-list"></div>
+            <div id="countries">
+                <ul id="country-list"></ul>
+            </div>
         </div>
     </body>
 </html>

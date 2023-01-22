@@ -18,10 +18,13 @@ body{
     width: 250px;
     height: 500px;
     background-color: whitesmoke;
+}
+
+#country-name{
     text-align: center;
 }
 
-#country-list{
+#countries{
     width: 250px;
     height: 500px;
     background-color:grey;
@@ -39,4 +42,17 @@ body{
 #country-flag{
     width: 200px;
     padding: 20px;
+    text-align: center;
+}
+
+#country-list{
+    list-style: none;
+}
+
+#country-list li{
+    border-bottom: 2px solid black;
+}
+
+.hide{
+    display: none;
 }
