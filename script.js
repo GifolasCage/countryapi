@@ -55,13 +55,8 @@
       },
       "wikipedia-btn": (element, property) => {
         element.setAttribute(property, countryIndex[id]["name"]);
-        element.addEventListener("click", () => {
-          const wikipediaLink = element.getAttribute(property);
-          window.open(
-            `https://en.wikipedia.org/wiki/${wikipediaLink}`,
-            "_blank"
-          );
-        });
+        element.removeEventListener("click", wikipediaClickHandler);
+        element.addEventListener("click", wikipediaClickHandler);
       },
       default: (element, property) => {
         element.innerText = countryIndex[id][property];
@@ -76,6 +71,11 @@
     }
 
     updateList(id);
+  }
+
+  function wikipediaClickHandler(event) {
+    const wikipediaLink = event.currentTarget.getAttribute("data-wikipedia");
+    window.open(`https://en.wikipedia.org/wiki/${wikipediaLink}`, "_blank");
   }
 
   function updateList(id) {
