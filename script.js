@@ -56,7 +56,7 @@
       "wikipedia-btn": (element, property) => {
         element.setAttribute(property, countryIndex[id]["name"]);
         element.addEventListener("click", () => {
-          const wikipediaLink = element.getAttribute("data-wikipedia");
+          const wikipediaLink = element.getAttribute(property);
           window.open(
             `https://en.wikipedia.org/wiki/${wikipediaLink}`,
             "_blank"
