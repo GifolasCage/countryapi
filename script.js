@@ -2,16 +2,20 @@
   const countryIndex = [];
 
   window.onload = async () => {
-    const statusText = document.getElementById("title");
-    const contentBox = document.getElementById("content-box");
-    const loadingText = document.getElementById("loading-text");
-    statusText.innerHTML = "Countries of the World";
     await GetData();
-    loadingText.classList.toggle("d-none");
-    contentBox.classList.toggle("d-none");
+    setUpView();
     sort();
     showRandomCountry();
   };
+
+  function setUpView() {
+    const contentBox = document.getElementById("content-box");
+    const loadingText = document.getElementById("loading-text");
+    const randomBtn = document.getElementById("random-btn");
+    loadingText.classList.toggle("d-none");
+    contentBox.classList.toggle("d-none");
+    randomBtn.addEventListener("click", showRandomCountry);
+  }
 
   function showRandomCountry() {
     const randomCountry = Math.floor(Math.random() * countryIndex.length);

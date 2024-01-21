@@ -29,3 +29,7 @@
 .loading-text {
   font-size: 8rem;
 }
+
+#random-btn {
+  align-self: center;
+}
