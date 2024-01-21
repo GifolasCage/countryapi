@@ -7,8 +7,8 @@
     const loadingText = document.getElementById("loading-text");
     statusText.innerHTML = "Countries of the World";
     await GetData();
-    loadingText.classList.add("d-none");
-    contentBox.classList.remove("d-none");
+    loadingText.classList.toggle("d-none");
+    contentBox.classList.toggle("d-none");
     sort();
     showRandomCountry();
   };
@@ -20,9 +20,7 @@
 
   async function GetData() {
     const url = "https://restcountries.com/v3.1/all/";
-    //const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     try {
-      //await delay(2000);
       const response = await fetch(url);
       const data = await response.json();
 
@@ -48,20 +46,34 @@
       capitol: "capitol",
       region: "region",
       population: "population",
+      "wikipedia-btn": "data-wikipedia",
+    };
+
+    const updateFunctions = {
+      "country-flag": (element, property) => {
+        element.src = countryIndex[id][property];
+      },
+      "wikipedia-btn": (element, property) => {
+        element.setAttribute(property, countryIndex[id]["name"]);
+        element.addEventListener("click", () => {
+          const wikipediaLink = element.getAttribute("data-wikipedia");
+          window.open(
+            `https://en.wikipedia.org/wiki/${wikipediaLink}`,
+            "_blank"
+          );
+        });
+      },
+      default: (element, property) => {
+        element.innerText = countryIndex[id][property];
+      },
     };
 
     for (const [elementId, property] of Object.entries(mappings)) {
       const element = document.getElementById(elementId);
-
-      if (elementId === "country-flag") {
-        element.src = countryIndex[id][property];
-      } else {
-        element.innerText = countryIndex[id][property];
-      }
+      const updateFunction =
+        updateFunctions[elementId] || updateFunctions.default;
+      updateFunction(element, property);
     }
-
-    const btn = document.getElementById("wikipedia-btn");
-    btn.setAttribute("data-wikipedia", countryIndex[id]["name"]);
 
     updateList(id);
   }
@@ -69,9 +81,8 @@
   function updateList(id) {
     const listItems = getListItems();
     Array.from(listItems).forEach((l) => l.classList.remove("fw-bold"));
-
     const listItem = document.getElementById(id);
-    listItem.classList.add("fw-bold");
+    listItem.classList.toggle("fw-bold");
   }
 
   function sort() {
@@ -84,6 +95,7 @@
   }
 
   function createList() {
+    const countryList = document.getElementById("country-list");
     countryIndex.forEach((c, i) => {
       const country = document.createElement("li");
       country.id = i;
@@ -95,10 +107,19 @@
         "fs-5",
         "py-1"
       );
-      document.getElementById("country-list").append(country);
-      country.addEventListener("click", () => updateCountry(country.id));
+      countryList.append(country);
     });
     searchList();
+    addClickToListItems();
+  }
+
+  function addClickToListItems() {
+    const countryList = document.getElementById("country-list");
+    countryList.addEventListener("click", (event) => {
+      if (event.target.tagName === "LI") {
+        updateCountry(event.target.id);
+      }
+    });
   }
 
   function searchList() {
@@ -121,8 +142,3 @@
     return listItems;
   }
 })();
-
-function wikipedia(btn) {
-  const wikipediaLink = btn.getAttribute("data-wikipedia");
-  window.open("https://en.wikipedia.org/wiki/" + wikipediaLink, "_blank");
-}
